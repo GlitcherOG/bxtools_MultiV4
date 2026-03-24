@@ -92,7 +92,7 @@ def get_patches_json(file_path):
 			main.points   = points
 			main.lightmap = patch["LightMapPoint"]
 			main.uvs    = patch["UVPoints"]
-			main.type   = patch["PatchStyle"]
+			main.type   = patch["SurfaceType"]
 			main.texture_path = patch["TexturePath"]
 			main.lightmap_uvs = patch["LightMapPoint"]
 			main.lightmap_id  = patch["LightmapID"]

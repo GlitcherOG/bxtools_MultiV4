@@ -959,7 +959,7 @@ class SSX2_OP_WorldImport(Operator):
 		active_collection = bpy.context.collection
 		io = scene.ssx2_WorldImportExportProps
 
-		models_folder_path = self.folder_path + '/Models/'
+		models_folder_path = self.folder_path + '/Meshes/'
 		if not os.path.exists(models_folder_path):
 			self.report({'ERROR'}, f"Folder 'Models' does not exist in 'Import Folder'")
 			return {'CANCELLED'}
@@ -969,9 +969,9 @@ class SSX2_OP_WorldImport(Operator):
 			self.report({'ERROR'}, f"File 'Materials.json' does not exist in 'Import Folder'")
 			return {'CANCELLED'}
 
-		models_file_path = self.folder_path + '/Prefabs.json'
+		models_file_path = self.folder_path + '/Models.json'
 		if not os.path.isfile(models_file_path):
-			self.report({'ERROR'}, f"File 'Prefabs.json' does not exist in 'Import Folder'")
+			self.report({'ERROR'}, f"File 'Models.json' does not exist in 'Import Folder'")
 			return {'CANCELLED'}
 
 		instances_file_path = self.folder_path + '/Instances.json'
@@ -1081,8 +1081,8 @@ class SSX2_OP_WorldImport(Operator):
 
 		model_collections = []
 
-		for i, json_fab in enumerate(data["Prefabs"]):
-			mdl_name = json_fab["PrefabName"]
+		for i, json_fab in enumerate(data["ModelNames"]):
+			mdl_name = json_fab["ModelName"]
 			# print(mdl_name, "sub_objs:", len(json_fab["PrefabObjects"]))
 
 			mdl_collection = bpy.data.collections.new(mdl_name)
@@ -1106,7 +1106,7 @@ class SSX2_OP_WorldImport(Operator):
 
 			sub_objs = []
 
-			for j, sub_obj in enumerate(json_fab["PrefabObjects"]):
+			for j, sub_obj in enumerate(json_fab["ModelObjects"]):
 				primary_mesh = ""
 				# primary_mesh_index = -1
 				if sub_obj["MeshData"]:
